@@ -3,7 +3,7 @@ import './App.css';
 import Cars from './Cars';
 import MyContext from './MyContext';
 
-class App extends React.Component() {
+class App extends React.Component {
   constructor(props) {
     super(props)
 
@@ -17,7 +17,7 @@ class App extends React.Component() {
   }
 
   moveCar(paramento, nome) {
-    this.getState({
+    this.setState({
       [nome]: paramento
     })
   }
