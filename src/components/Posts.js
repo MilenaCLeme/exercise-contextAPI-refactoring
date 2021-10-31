@@ -1,17 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import Context from '../context/Context';
 
-const Posts = ({ posts }) => (
-  <ul>
-    {posts.map(({ id, title }) => <li key={id}>{title}</li>)}
-  </ul>
-);
 
-Posts.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  })).isRequired,
-};
+function Posts() {
+  const {  api, carregando } = useContext(Context);
+  console.log(api)
+
+  const returnApi = () => {
+    return (
+      <ul>
+      { api.map(({ id, title }) => <li key={id}>{title}</li>)}
+      </ul>
+    );
+  };
+
+
+  return (
+    <div>
+      { carregando === false ? <h2>Loading...</h2> : returnApi() }
+    </div>
+  );
+}
 
 export default Posts;

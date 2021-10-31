@@ -1,35 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import Context from '../context/Context';
 
-const renderOptions = (options) => (
-  options.map((option) => (
-    <option
-      value={option}
-      key={option}
-    >
-      {option}
-    </option>
-  ))
-);
+function Selector() {
+  const { options, value, setvalue } = useContext(Context);
 
-const Selector = ({ value, onChange, options }) => (
-  <span>
-    <h1>{`Selected: ${value}`}</h1>
-    <select
-      onChange={(e) => onChange(e.target.value)}
-      value={value}
-    >
-      {renderOptions(options)}
-    </select>
-  </span>
-);
-
-Selector.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.string.isRequired,
-  ).isRequired,
-  value: PropTypes.string.isRequired,
-};
+  return (
+    <span>
+      <h1>{`Selected: ${value}`}</h1>
+      <select
+        onChange={(e) => setvalue(e.target.value)}
+        value={value}
+      >
+        {
+        options.map((option) => (
+        <option
+        value={option}
+        key={option}
+        >
+          {option}
+        </option>
+        ))
+        }
+      </select>
+    </span>
+  );
+}
 
 export default Selector;
